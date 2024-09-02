@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryClientProvider } from '@/components/react-query-client-provider'
+import { twJoin } from 'tailwind-merge'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,13 +16,18 @@ const queryClient = new QueryClient()
 
 export default function RootLayout({
 	children,
+	sidebar,
 }: Readonly<{
 	children: React.ReactNode
+	sidebar: React.ReactNode
 }>) {
 	return (
 		<html lang="en">
-			<body className={inter.className}>
-				<ReactQueryClientProvider>{children}</ReactQueryClientProvider>
+			<body className={twJoin(inter.className, 'flex')}>
+				<ReactQueryClientProvider>
+					{sidebar}
+					{children}
+				</ReactQueryClientProvider>
 			</body>
 		</html>
 	)

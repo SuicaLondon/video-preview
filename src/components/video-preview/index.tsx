@@ -20,13 +20,13 @@ export function VideoPreviewComponent({
 }: VideoPreviewComponentProps) {
 	return (
 		<div
-			className={clsx('flex w-full max-w-96 flex-col space-y-2 rounded-xl', {
+			className={clsx('flex w-full max-w-96 flex-col space-y-2 rounded-xl p-3', {
 				'hover:bg-hover-odd dark:hover:bg-hover-odd-dark': isOdd,
 				'hover:bg-hover-even dark:hover:bg-hover-even-dark': !isOdd,
 			})}
 		>
 			<div className="h-44 w-full rounded-lg bg-red-500">Video</div>
-			<div className="relative flex space-x-2">
+			<div className="relative flex h-36 space-x-2">
 				<UserAvatarComponent username={author} href={`/profile/${author}`} />
 				<div>
 					<VideoTitleComponent title={title} />
