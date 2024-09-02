@@ -7,5 +7,5 @@ interface VideoTitleProps {
 export const VideoTitleComponent = memo(function VideoTitleComponent({
 	title,
 }: VideoTitleProps) {
-	return <h3 className="text-xl font-bold">{title}</h3>
+	return <h3 className="text-ellipsis text-xl font-bold">{title}</h3>
 })

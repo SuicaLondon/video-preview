@@ -7,5 +7,5 @@ interface VideoTextProps {
 export const VideoTextComponent = function VideoTextComponent({
 	text,
 }: VideoTextProps) {
-	return <p>{text}</p>
+	return <p className="text-ellipsis text-gray-700 dark:text-gray-300">{text}</p>
 }
