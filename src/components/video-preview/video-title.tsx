@@ -4,6 +4,8 @@ interface VideoTitleProps {
 	title: string
 }
 
-export const VideoTitle = memo(function VideoTitle({ title }: VideoTitleProps) {
+export const VideoTitleComponent = memo(function VideoTitleComponent({
+	title,
+}: VideoTitleProps) {
 	return <h3 className="text-xl font-bold">{title}</h3>
 })

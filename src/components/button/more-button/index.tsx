@@ -8,7 +8,7 @@ interface MoreButtonProps {
 	className: string
 }
 
-export const MoreButton = memo(function MoreButton({
+export const MoreButtonComponent = memo(function MoreButtonComponent({
 	onClick,
 	className,
 }: MoreButtonProps) {

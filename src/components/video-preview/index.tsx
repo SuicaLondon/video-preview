@@ -1,8 +1,8 @@
 import clsx from 'clsx'
-import { MoreButton } from '../button/more-button'
-import { UserIcon } from '../user-icon'
-import { VideoTitle } from './video-title'
-import VideoText from './video-text'
+import { MoreButtonComponent } from '../button/more-button'
+import { UserAvatarComponent } from '../user-avatar'
+import { VideoTextComponent } from './video-text'
+import { VideoTitleComponent } from './video-title'
 
 type VideoPreviewComponentProps = {
 	isOdd: boolean
@@ -18,16 +18,16 @@ export function VideoPreviewComponent({ isOdd }: VideoPreviewComponentProps) {
 		>
 			<div className="h-44 w-full rounded-lg bg-red-500">Video</div>
 			<div className="relative flex space-x-2">
-				<UserIcon username={'Suica'} href="/profile/Suica" />
+				<UserAvatarComponent username={'Suica'} href="/profile/Suica" />
 				<div>
-					<VideoTitle title="Title" />
-					<VideoText text="Author" />
+					<VideoTitleComponent title="Title" />
+					<VideoTextComponent text="Author" />
 					<div>
 						<div>71K Views</div>
 						<div>3 months ago</div>
 					</div>
 				</div>
-				<MoreButton className="absolute right-0 top-0" />
+				<MoreButtonComponent className="absolute right-0 top-0" />
 			</div>
 		</div>
 	)

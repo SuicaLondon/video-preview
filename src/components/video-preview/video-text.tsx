@@ -4,6 +4,8 @@ interface VideoTextProps {
 	text: string
 }
 
-export default function VideoText({ text }: VideoTextProps) {
+export const VideoTextComponent = function VideoTextComponent({
+	text,
+}: VideoTextProps) {
 	return <p>{text}</p>
 }
