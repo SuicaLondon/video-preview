@@ -4,13 +4,13 @@ export const SIDEBAR_LINK_LIST: SidebarLinkItem[] = [
 	{
 		id: '0',
 		href: '/videos',
-		name: 'Client Side Rendering Video List',
+		name: 'CSR Videos',
 		icon: '🐧',
 	},
 	{
 		id: '1',
 		href: '/videos-ssr',
-		name: 'Server Side Rendering Video List',
+		name: 'SSR Videos',
 		icon: '🦅',
 	},
 ]

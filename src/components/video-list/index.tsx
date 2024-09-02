@@ -13,6 +13,14 @@ export const VideoListComponent = memo(function VideoListComponent({
 				return (
 					<VideoPreviewComponent
 						key={index}
+						id={video.id}
+						thumbnailUrl={video.thumbnailUrl}
+						duration={video.duration}
+						uploadTime={video.uploadTime}
+						videoUrl={video.videoUrl}
+						description={video.description}
+						subscriber={video.subscriber}
+						isLive={video.isLive}
 						title={video.title}
 						author={video.author}
 						views={video.views}

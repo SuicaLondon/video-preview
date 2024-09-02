@@ -4,11 +4,9 @@ import { UserAvatarComponent } from '../user-avatar'
 import { VideoTextComponent } from './video-text'
 import { VideoTitleComponent } from './video-title'
 import { formatViews } from '@/utils/format/format-utils'
+import { ThumbnailPreviewContainerComponent } from './thumbnail-preview-container'
 
-type VideoPreviewComponentProps = {
-	title: string
-	author: string
-	views: string
+interface VideoPreviewComponentProps extends VideoResult {
 	isOdd: boolean
 }
 
@@ -16,6 +14,8 @@ export function VideoPreviewComponent({
 	title,
 	author,
 	views,
+	thumbnailUrl,
+	videoUrl,
 	isOdd,
 }: VideoPreviewComponentProps) {
 	return (
@@ -25,7 +25,11 @@ export function VideoPreviewComponent({
 				'hover:bg-hover-even dark:hover:bg-hover-even-dark': !isOdd,
 			})}
 		>
-			<div className="h-44 w-full rounded-lg bg-red-500">Video</div>
+			<ThumbnailPreviewContainerComponent
+				title={title}
+				thumbnailUrl={thumbnailUrl}
+				videoUrl={videoUrl}
+			/>
 			<div className="relative flex h-36 space-x-2">
 				<UserAvatarComponent username={author} href={`/profile/${author}`} />
 				<div>
