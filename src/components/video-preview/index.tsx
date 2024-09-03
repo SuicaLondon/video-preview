@@ -5,6 +5,7 @@ import { VideoTextComponent } from './video-text'
 import { VideoTitleComponent } from './video-title'
 import { formatViews } from '@/utils/format/format-utils'
 import { ThumbnailPreviewContainerComponent } from './thumbnail-preview-container'
+import { VideoMode, VideoResult } from '@/models/video-list'
 
 interface VideoPreviewComponentProps extends VideoResult {
 	isOdd: boolean
@@ -16,11 +17,13 @@ export function VideoPreviewComponent({
 	views,
 	thumbnailUrl,
 	videoUrl,
+	isLive,
+	duration,
 	isOdd,
 }: VideoPreviewComponentProps) {
 	return (
 		<div
-			className={clsx('flex w-full max-w-96 flex-col space-y-2 rounded-xl p-3', {
+			className={clsx('flex w-full max-w-96 flex-col space-y-4 rounded-xl p-3', {
 				'hover:bg-hover-odd dark:hover:bg-hover-odd-dark': isOdd,
 				'hover:bg-hover-even dark:hover:bg-hover-even-dark': !isOdd,
 			})}
@@ -29,6 +32,8 @@ export function VideoPreviewComponent({
 				title={title}
 				thumbnailUrl={thumbnailUrl}
 				videoUrl={videoUrl}
+				duration={duration}
+				mode={isLive ? VideoMode.interactive : VideoMode.static}
 			/>
 			<div className="relative flex h-36 space-x-2">
 				<UserAvatarComponent username={author} href={`/profile/${author}`} />
