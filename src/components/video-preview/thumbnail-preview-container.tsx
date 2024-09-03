@@ -4,6 +4,7 @@ import { useRef, useState } from 'react'
 import { VideoMode, VideoModeEnum, VideoModeProps } from './index.type'
 import { PreviewComponent } from './preview'
 import { ThumbnailComponent } from './thumbnail'
+import VideoTimeText from './video-time-text'
 
 type ThumbnailPreviewContainerProps = Pick<
 	VideoResult,
@@ -54,13 +55,17 @@ export function ThumbnailPreviewContainerComponent({
 				{...props}
 			/>
 			{!isPlaying && (
-				<div className="absolute left-0 top-0 h-full w-full">
-					<ThumbnailComponent title={title} thumbnailUrl={thumbnailUrl} />
-				</div>
+				<>
+					<div className="absolute left-0 top-0 h-full w-full">
+						<ThumbnailComponent title={title} thumbnailUrl={thumbnailUrl} />
+					</div>
+
+					<VideoTimeText
+						className="absolute bottom-2 right-2 z-10"
+						timeString={duration}
+					/>
+				</>
 			)}
-			<p className="absolute bottom-2 right-2 z-10 select-none rounded-md bg-slate-700 px-2 py-1 text-white opacity-80">
-				{duration}
-			</p>
 		</div>
 	)
 }

@@ -6,6 +6,8 @@ import { VideoCallback } from './index.type'
 import { VideoMuteButtonComponent } from './video-mute-button'
 import { VideoTrackBarComponent } from './video-track-bar'
 import { useThrottleState } from '@/hooks/use-throttle-state'
+import VideoTimeText from './video-time-text'
+import { formatSecondsToHHmmss } from '@/utils/format/format-utils'
 interface PreviewComponentBasicProps
 	extends Pick<VideoResult, 'videoUrl' | 'title' | 'duration'> {
 	isPlaying: boolean
@@ -88,6 +90,12 @@ export const PreviewComponent = memo(function PreviewComponent({
 				onVideoProgressChanged={onVideoProgressChanged}
 				currentTime={currentTime}
 			/>
+			{isPlaying && (
+				<VideoTimeText
+					className="absolute bottom-2 right-2 z-10"
+					timeString={`${formatSecondsToHHmmss(currentTime)} / ${formatSecondsToHHmmss(videoRef.current?.duration ?? 0)}`}
+				/>
+			)}
 		</div>
 	)
 })
