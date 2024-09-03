@@ -36,6 +36,7 @@ export const PreviewComponent = memo(function PreviewComponent({
 		if (isPlaying) {
 			if (!videoRef.current) return
 			try {
+				videoRef.current.controls = false
 				videoRef?.current?.play()
 				if (videoRef.current) {
 					if (videoRef.current.currentTime === 0) {

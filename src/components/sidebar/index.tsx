@@ -17,7 +17,7 @@ export const SidebarComponent = memo(function SidebarComponent({
 	const [isOpened, setIsOpened] = useState(false)
 	return (
 		<aside
-			className={clsx('p-4 transition-all', {
+			className={clsx('p-2 transition-all', {
 				'w-52': isOpened,
 				'w-10': !isOpened,
 			})}

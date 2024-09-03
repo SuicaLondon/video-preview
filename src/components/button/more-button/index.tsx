@@ -5,7 +5,7 @@ import { twMerge } from 'tailwind-merge'
 
 interface MoreButtonProps {
 	onClick?: () => void
-	className: string
+	className?: string
 }
 
 export const MoreButtonComponent = memo(function MoreButtonComponent({
