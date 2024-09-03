@@ -43,7 +43,7 @@ export function ThumbnailPreviewContainerComponent({
 	}
 	return (
 		<div
-			className="relative h-44 w-full overflow-clip rounded-lg"
+			className="relative h-full w-full overflow-clip rounded-lg"
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
 		>

@@ -9,8 +9,13 @@ interface VideoListComponentProps {
 export const VideoListComponent = memo(function VideoListComponent({
 	videoList,
 }: VideoListComponentProps) {
+	/// This is not the best solution, it have a couple of solution which is better
+	/// 1. What Youtube is using is calculating the screen width and decide the max width of each component of video card
+	/// 2. Another solution is make larger breakpoints likes xxl: 1920px to flex and set a bigger max-width for video card
+	///    For the smaller screen size, remove the max-width to make it flexible, but it do need the redesign of the image
+	///    Ratio.
 	return (
-		<div className="flex w-full flex-row flex-wrap items-center">
+		<div className="col-span-3 grid w-full grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:flex xl:flex-wrap xl:items-center">
 			{videoList?.map((video, index) => {
 				return (
 					<VideoPreviewComponent
