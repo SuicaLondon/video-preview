@@ -8,5 +8,8 @@ export default function VideoList() {
 	if (isLoading) {
 		return <VideoListPlaceholderComponent />
 	}
+	if (error) {
+		throw error
+	}
 	return <VideoListComponent videoList={videoList ?? []} />
 }
