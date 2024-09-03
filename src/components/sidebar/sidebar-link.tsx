@@ -13,9 +13,12 @@ export function SidebarLink({ href, name, icon, isOpened }: SidebarLinkProps) {
 	return (
 		<li>
 			<Link
-				className={clsx('hover:bg-gray-700 dark:hover:bg-gray-300', {
-					underline: pathname != href,
-				})}
+				className={clsx(
+					'focus-solid-outline hover:bg-gray-700 dark:hover:bg-gray-300',
+					{
+						underline: pathname != href,
+					},
+				)}
 				href={href}
 			>
 				{isOpened ? `${icon} ${name}` : icon}

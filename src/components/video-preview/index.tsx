@@ -57,17 +57,17 @@ export function VideoPreviewComponent({
 				mode={mode}
 				{...props}
 			/>
-			<div className="relative flex h-32 space-x-2">
+			<div className="relative flex h-32 items-start space-x-2">
 				<UserAvatarComponent username={author} href={`/profile/${author}`} />
 				<div className="flex-1">
-					<VideoTitleComponent title={title} />
+					<VideoTitleComponent title={title} href={`/video/${title}`} />
 					<VideoTextComponent text={author} />
 					<div>
 						<div>{formatViews(views)} Views</div>
 						<div>{formatDistance(uploadTime, new Date(), { addSuffix: true })}</div>
 					</div>
 				</div>
-				<MoreButtonComponent className="absolute right-0 top-0" />
+				<MoreButtonComponent />
 			</div>
 		</div>
 	)
