@@ -20,7 +20,7 @@ export function ThumbnailPreviewContainerComponent({
 	const timerRef = useRef<NodeJS.Timeout | null>(null)
 	const [isPlaying, setIsPlaying] = useState(false)
 
-	const handleMouseOver = () => {
+	const handleMouseEnter = () => {
 		console.log('over')
 		if (mode === VideoMode.interactive) {
 			timerRef.current = setTimeout(() => {
@@ -43,7 +43,7 @@ export function ThumbnailPreviewContainerComponent({
 	return (
 		<div
 			className="relative h-44 w-full overflow-clip rounded-lg"
-			onMouseOver={handleMouseOver}
+			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
 		>
 			<PreviewComponent

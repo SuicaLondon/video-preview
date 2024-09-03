@@ -1,6 +1,7 @@
 import React, { memo, RefObject, useCallback, useState } from 'react'
 import VolumeUpIcon from '@mui/icons-material/VolumeUp'
 import VolumeOffIcon from '@mui/icons-material/VolumeOff'
+import { twMerge } from 'tailwind-merge'
 
 interface VideoMuteButtonComponentProps {
 	videoRef: RefObject<HTMLVideoElement>
@@ -24,7 +25,13 @@ export const VideoMuteButtonComponent = memo(function VideoMuteButtonComponent({
 		}
 	}
 	return (
-		<button className={className} onClick={handleMute}>
+		<button
+			className={twMerge(
+				'rounded-full bg-gray-300 p-2 dark:bg-gray-700',
+				className,
+			)}
+			onClick={handleMute}
+		>
 			{isMuted ? <VolumeOffIcon /> : <VolumeUpIcon />}
 		</button>
 	)
