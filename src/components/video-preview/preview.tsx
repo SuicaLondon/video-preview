@@ -4,7 +4,8 @@ import { memo, useEffect, useRef, useState } from 'react'
 
 import { VideoCallback } from './index.type'
 import { VideoMuteButtonComponent } from './video-mute-button'
-import { VideoProgressComponent } from './video-progress'
+import { VideoTrackBarComponent } from './video-track-bar'
+import { useThrottleState } from '@/hooks/use-throttle-state'
 interface PreviewComponentBasicProps
 	extends Pick<VideoResult, 'videoUrl' | 'title' | 'duration'> {
 	isPlaying: boolean
@@ -22,7 +23,10 @@ export const PreviewComponent = memo(function PreviewComponent({
 	onVideoSeek,
 }: PreviewComponentProps) {
 	const videoRef = useRef<HTMLVideoElement>(null)
-	const [currentTime, setCurrentTime] = useState(0)
+	const [currentTime, setCurrentTime, setThrottleCurrentTime] = useThrottleState(
+		0,
+		1000,
+	)
 
 	useEffect(() => {
 		if (isPlaying) {
@@ -49,7 +53,7 @@ export const PreviewComponent = memo(function PreviewComponent({
 
 	const handleTimeUpdate = () => {
 		if (videoRef.current) {
-			setCurrentTime(videoRef.current.currentTime)
+			setThrottleCurrentTime(videoRef.current.currentTime)
 			if (videoRef.current.currentTime >= videoRef.current.duration) {
 				onVideoEnd?.(videoRef.current)
 			}
@@ -78,7 +82,7 @@ export const PreviewComponent = memo(function PreviewComponent({
 				videoRef={videoRef}
 				className={'absolute right-2 top-2'}
 			/>
-			<VideoProgressComponent
+			<VideoTrackBarComponent
 				videoRef={videoRef}
 				className="absolute bottom-0"
 				onVideoProgressChanged={onVideoProgressChanged}

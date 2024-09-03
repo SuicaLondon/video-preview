@@ -1,7 +1,6 @@
-import React from 'react'
-import { useQuery } from '@tanstack/react-query'
-import { VideoListResponse } from '@/models/video-list'
 import { fetchVideos } from '@/clients/video'
+import { VideoListResponse } from '@/models/video-list'
+import { useQuery } from '@tanstack/react-query'
 
 export const useFetchVideoListQuery = () => {
 	const { data, error, isLoading } = useQuery<VideoListResponse>({
