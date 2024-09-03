@@ -80,6 +80,7 @@ export const PreviewComponent = memo(function PreviewComponent({
 				aria-label={`The preview video of ${title}`}
 				autoPlay={false}
 				muted={true}
+				controls={false}
 				onTimeUpdate={handleTimeUpdate}
 			/>
 			<VideoMuteButtonComponent
