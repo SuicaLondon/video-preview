@@ -5,11 +5,27 @@ import { VideoTextComponent } from './video-text'
 import { VideoTitleComponent } from './video-title'
 import { formatViews } from '@/utils/format/format-utils'
 import { ThumbnailPreviewContainerComponent } from './thumbnail-preview-container'
-import { VideoMode, VideoResult } from '@/models/video-list'
+import { VideoMode, VideoModeProps } from './index.type'
+import { VideoResult } from '@/models/video-list'
+import { formatDistance } from 'date-fns'
 
-interface VideoPreviewComponentProps extends VideoResult {
-	isOdd: boolean
+interface VideoPreviewComponentBasicProps
+	extends Pick<
+		VideoResult,
+		| 'id'
+		| 'title'
+		| 'thumbnailUrl'
+		| 'duration'
+		| 'uploadTime'
+		| 'views'
+		| 'author'
+		| 'videoUrl'
+	> {
+	isOdd?: boolean
 }
+
+type VideoPreviewComponentProps = VideoPreviewComponentBasicProps &
+	VideoModeProps
 
 export function VideoPreviewComponent({
 	title,
@@ -17,9 +33,11 @@ export function VideoPreviewComponent({
 	views,
 	thumbnailUrl,
 	videoUrl,
-	isLive,
 	duration,
-	isOdd,
+	uploadTime,
+	mode = VideoMode.static,
+	isOdd = true,
+	...props
 }: VideoPreviewComponentProps) {
 	return (
 		<div
@@ -33,16 +51,17 @@ export function VideoPreviewComponent({
 				thumbnailUrl={thumbnailUrl}
 				videoUrl={videoUrl}
 				duration={duration}
-				mode={isLive ? VideoMode.interactive : VideoMode.static}
+				mode={mode}
+				{...props}
 			/>
-			<div className="relative flex h-36 space-x-2">
+			<div className="relative flex h-32 space-x-2">
 				<UserAvatarComponent username={author} href={`/profile/${author}`} />
-				<div>
+				<div className="flex-1">
 					<VideoTitleComponent title={title} />
 					<VideoTextComponent text={author} />
 					<div>
 						<div>{formatViews(views)} Views</div>
-						<div>3 months ago</div>
+						<div>{formatDistance(uploadTime, new Date(), { addSuffix: true })}</div>
 					</div>
 				</div>
 				<MoreButtonComponent className="absolute right-0 top-0" />

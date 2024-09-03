@@ -1,3 +1,6 @@
+import { format, parseISO } from 'date-fns'
+import { formatInTimeZone } from 'date-fns-tz'
+
 const numberShortHandMapList = [
 	{ value: 1e12, symbol: 'T' },
 	{ value: 1e9, symbol: 'B' },
@@ -20,4 +23,30 @@ export function formatViews(views: string | number) {
 	}
 
 	return viewNumber.toString()
+}
+
+function isInt(number: number) {
+	return number % 1 === 0
+}
+
+function addZeroToTime(time: number): string {
+	if (time < 0 || Number.isNaN(time) || !isInt(time))
+		throw TypeError('Invalid Number')
+	if (time < 10) {
+		return `0${time}`
+	}
+	return time.toString()
+}
+
+export function formatSecondsToHHmmss(
+	totalSeconds: number,
+	alwaysShowHours: boolean = false,
+) {
+	let hours = Math.floor(totalSeconds / 3600)
+	let minutes = Math.floor((totalSeconds % 3600) / 60)
+	let seconds = Math.floor((totalSeconds % 3600) % 60)
+	if (alwaysShowHours || hours > 0) {
+		return `${addZeroToTime(hours)}:${addZeroToTime(minutes)}:${addZeroToTime(seconds)}`
+	}
+	return `${addZeroToTime(minutes)}:${addZeroToTime(seconds)}`
 }

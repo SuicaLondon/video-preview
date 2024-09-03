@@ -1,40 +1,53 @@
 'use client'
 import { VideoResult } from '@/models/video-list'
-import React, {
-	memo,
-	MouseEvent,
-	MouseEventHandler,
-	RefObject,
-	useEffect,
-	useRef,
-	useState,
-} from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 
-import { millisecondsToSeconds, parse, parseISO } from 'date-fns'
-import { VideoProgressComponent } from './video-progress'
+import { VideoCallback } from './index.type'
 import { VideoMuteButtonComponent } from './video-mute-button'
-interface PreviewComponentProps
+import { VideoTrackBarComponent } from './video-track-bar'
+import { useThrottleState } from '@/hooks/use-throttle-state'
+import VideoTimeText from './video-time-text'
+import { formatSecondsToHHmmss } from '@/utils/format/format-utils'
+interface PreviewComponentBasicProps
 	extends Pick<VideoResult, 'videoUrl' | 'title' | 'duration'> {
 	isPlaying: boolean
 }
+
+type PreviewComponentProps = PreviewComponentBasicProps & VideoCallback
 
 export const PreviewComponent = memo(function PreviewComponent({
 	videoUrl,
 	title,
 	isPlaying,
-	duration,
+	onVideoStart,
+	onVideoEnd,
+	onVideoResume,
+	onVideoSeek,
 }: PreviewComponentProps) {
 	const videoRef = useRef<HTMLVideoElement>(null)
-	const [currentTime, setCurrentTime] = useState(0)
+	const [currentTime, setCurrentTime, setThrottleCurrentTime] = useThrottleState(
+		0,
+		1000,
+	)
 
 	useEffect(() => {
 		if (isPlaying) {
-			videoRef?.current?.play().catch((error) => {
+			if (!videoRef.current) return
+			try {
+				videoRef?.current?.play()
 				if (videoRef.current) {
-					videoRef.current.muted = false
-					videoRef.current.play()
+					if (videoRef.current.currentTime === 0) {
+						onVideoStart?.(videoRef.current)
+					} else {
+						onVideoResume?.(videoRef.current, videoRef.current.currentTime)
+					}
 				}
-			})
+			} catch (error) {
+				// TODO: Log it to Sentry
+				console.error(error)
+				videoRef.current.muted = false
+				videoRef.current.play()
+			}
 		} else {
 			videoRef?.current?.pause()
 		}
@@ -42,7 +55,17 @@ export const PreviewComponent = memo(function PreviewComponent({
 
 	const handleTimeUpdate = () => {
 		if (videoRef.current) {
-			setCurrentTime(videoRef.current.currentTime)
+			setThrottleCurrentTime(videoRef.current.currentTime)
+			if (videoRef.current.currentTime >= videoRef.current.duration) {
+				onVideoEnd?.(videoRef.current)
+			}
+		}
+	}
+
+	const onVideoProgressChanged = (time: number) => {
+		setCurrentTime(time)
+		if (videoRef.current) {
+			onVideoSeek?.(videoRef.current, time)
 		}
 	}
 
@@ -54,18 +77,25 @@ export const PreviewComponent = memo(function PreviewComponent({
 				src={videoUrl}
 				aria-label={`The preview video of ${title}`}
 				autoPlay={false}
+				muted={true}
 				onTimeUpdate={handleTimeUpdate}
 			/>
 			<VideoMuteButtonComponent
 				videoRef={videoRef}
 				className={'absolute right-2 top-2'}
 			/>
-			<VideoProgressComponent
+			<VideoTrackBarComponent
 				videoRef={videoRef}
 				className="absolute bottom-0"
-				seCurrentTime={setCurrentTime}
+				onVideoProgressChanged={onVideoProgressChanged}
 				currentTime={currentTime}
 			/>
+			{isPlaying && (
+				<VideoTimeText
+					className="absolute bottom-2 right-2 z-10"
+					timeString={`${formatSecondsToHHmmss(currentTime)} / ${formatSecondsToHHmmss(videoRef.current?.duration ?? 0)}`}
+				/>
+			)}
 		</div>
 	)
 })

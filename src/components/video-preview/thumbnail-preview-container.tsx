@@ -1,14 +1,16 @@
 'use client'
-import { title } from 'process'
-import { ThumbnailComponent } from './thumbnail'
+import { VideoResult } from '@/models/video-list'
 import { useRef, useState } from 'react'
+import { VideoMode, VideoModeEnum, VideoModeProps } from './index.type'
 import { PreviewComponent } from './preview'
-import { VideoMode, VideoModeEnum, VideoResult } from '@/models/video-list'
+import { ThumbnailComponent } from './thumbnail'
+import VideoTimeText from './video-time-text'
 
-interface ThumbnailPreviewContainerProps
-	extends Pick<VideoResult, 'thumbnailUrl' | 'videoUrl' | 'title' | 'duration'> {
-	mode: VideoModeEnum
-}
+type ThumbnailPreviewContainerProps = Pick<
+	VideoResult,
+	'thumbnailUrl' | 'videoUrl' | 'title' | 'duration'
+> &
+	VideoModeProps
 
 export function ThumbnailPreviewContainerComponent({
 	thumbnailUrl,
@@ -16,12 +18,12 @@ export function ThumbnailPreviewContainerComponent({
 	title,
 	duration,
 	mode,
+	...props
 }: ThumbnailPreviewContainerProps) {
 	const timerRef = useRef<NodeJS.Timeout | null>(null)
 	const [isPlaying, setIsPlaying] = useState(false)
 
-	const handleMouseOver = () => {
-		console.log('over')
+	const handleMouseEnter = () => {
 		if (mode === VideoMode.interactive) {
 			timerRef.current = setTimeout(() => {
 				setIsPlaying(true)
@@ -31,7 +33,6 @@ export function ThumbnailPreviewContainerComponent({
 	}
 
 	const handleMouseLeave = () => {
-		console.log('out')
 		if (mode === VideoMode.interactive) {
 			if (timerRef.current) {
 				clearTimeout(timerRef.current)
@@ -43,7 +44,7 @@ export function ThumbnailPreviewContainerComponent({
 	return (
 		<div
 			className="relative h-44 w-full overflow-clip rounded-lg"
-			onMouseOver={handleMouseOver}
+			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
 		>
 			<PreviewComponent
@@ -51,15 +52,20 @@ export function ThumbnailPreviewContainerComponent({
 				videoUrl={videoUrl}
 				title={title}
 				duration={duration}
+				{...props}
 			/>
 			{!isPlaying && (
-				<div className="absolute left-0 top-0 h-full w-full">
-					<ThumbnailComponent title={title} thumbnailUrl={thumbnailUrl} />
-				</div>
+				<>
+					<div className="absolute left-0 top-0 h-full w-full">
+						<ThumbnailComponent title={title} thumbnailUrl={thumbnailUrl} />
+					</div>
+
+					<VideoTimeText
+						className="absolute bottom-2 right-2 z-10"
+						timeString={duration}
+					/>
+				</>
 			)}
-			<p className="absolute bottom-2 right-2 z-10 select-none rounded-md bg-slate-700 px-2 py-1 text-white opacity-80">
-				{duration}
-			</p>
 		</div>
 	)
 }
