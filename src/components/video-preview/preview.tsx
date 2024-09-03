@@ -83,6 +83,10 @@ export const PreviewComponent = memo(function PreviewComponent({
 				muted={true}
 				controls={false}
 				onTimeUpdate={handleTimeUpdate}
+				onError={(error) => {
+					// TODO: Log in Sentry
+					console.error(error)
+				}}
 			/>
 			<VideoMuteButtonComponent
 				videoRef={videoRef}
