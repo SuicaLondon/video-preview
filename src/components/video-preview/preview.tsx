@@ -1,18 +1,9 @@
 'use client'
 import { VideoResult } from '@/models/video-list'
-import React, {
-	memo,
-	MouseEvent,
-	MouseEventHandler,
-	RefObject,
-	useEffect,
-	useRef,
-	useState,
-} from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 
-import { millisecondsToSeconds, parse, parseISO } from 'date-fns'
-import { VideoProgressComponent } from './video-progress'
 import { VideoMuteButtonComponent } from './video-mute-button'
+import { VideoProgressComponent } from './video-progress'
 interface PreviewComponentProps
 	extends Pick<VideoResult, 'videoUrl' | 'title' | 'duration'> {
 	isPlaying: boolean
@@ -22,7 +13,6 @@ export const PreviewComponent = memo(function PreviewComponent({
 	videoUrl,
 	title,
 	isPlaying,
-	duration,
 }: PreviewComponentProps) {
 	const videoRef = useRef<HTMLVideoElement>(null)
 	const [currentTime, setCurrentTime] = useState(0)
@@ -54,6 +44,7 @@ export const PreviewComponent = memo(function PreviewComponent({
 				src={videoUrl}
 				aria-label={`The preview video of ${title}`}
 				autoPlay={false}
+				muted={true}
 				onTimeUpdate={handleTimeUpdate}
 			/>
 			<VideoMuteButtonComponent

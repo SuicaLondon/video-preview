@@ -11,7 +11,7 @@ export const VideoMuteButtonComponent = memo(function VideoMuteButtonComponent({
 	videoRef,
 	className,
 }: VideoMuteButtonComponentProps) {
-	const [isMuted, setIsMuted] = useState(false)
+	const [isMuted, setIsMuted] = useState(true)
 	const handleMute = () => {
 		if (videoRef.current) {
 			if (isMuted) {
