@@ -24,6 +24,8 @@ export const PreviewComponent = memo(function PreviewComponent({
 	onVideoResume,
 	onVideoSeek,
 }: PreviewComponentProps) {
+	/// Video should be loaded lazily, with the IntersectionObserver and call load function manually
+	/// The current time and other state could be moved to state management or whatever using useSyncExternalStore
 	const videoRef = useRef<HTMLVideoElement>(null)
 	const [currentTime, setCurrentTime, setThrottleCurrentTime] = useThrottleState(
 		0,
