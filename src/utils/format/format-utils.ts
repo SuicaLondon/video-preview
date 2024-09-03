@@ -26,7 +26,8 @@ function isInt(number: number) {
 	return number % 1 === 0
 }
 
-function addZeroToTime(time: number): string {
+export function addZeroToTime(time: number): string {
+	console.log('Time', time)
 	if (time < 0 || Number.isNaN(time) || !isInt(time))
 		throw TypeError('Invalid Number')
 	if (time < 10) {
