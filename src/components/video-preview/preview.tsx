@@ -82,6 +82,7 @@ export const PreviewComponent = memo(function PreviewComponent({
 				autoPlay={false}
 				muted={true}
 				controls={false}
+				playsInline
 				onTimeUpdate={handleTimeUpdate}
 				onError={(error) => {
 					// TODO: Log in Sentry
