@@ -20,8 +20,9 @@ export const VideoListComponent = memo(function VideoListComponent({
 						duration={video.duration}
 						uploadTime={video.uploadTime}
 						videoUrl={video.videoUrl}
-						// If hardcoded mode to static, it will throw error if the callback function was set
-						mode={video.isLive ? VideoMode.interactive : VideoMode.static}
+						/// It will throw error if the callback function was set while the mode is static
+						mode={VideoMode.interactive}
+						// mode={ VideoMode.static}
 						onVideoStart={(videoTarget) => console.log('onVideoStart: ')}
 						onVideoEnd={(videoTarget) => console.log('onVideoEnd: ')}
 						onVideoResume={(videoTarget, time) =>

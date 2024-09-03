@@ -7,6 +7,7 @@ import { formatViews } from '@/utils/format/format-utils'
 import { ThumbnailPreviewContainerComponent } from './thumbnail-preview-container'
 import { VideoMode, VideoModeProps } from './index.type'
 import { VideoResult } from '@/models/video-list'
+import { formatDistance } from 'date-fns'
 
 interface VideoPreviewComponentBasicProps
 	extends Pick<
@@ -33,6 +34,7 @@ export function VideoPreviewComponent({
 	thumbnailUrl,
 	videoUrl,
 	duration,
+	uploadTime,
 	mode = VideoMode.static,
 	isOdd = true,
 	...props
@@ -52,14 +54,14 @@ export function VideoPreviewComponent({
 				mode={mode}
 				{...props}
 			/>
-			<div className="relative flex h-36 space-x-2">
+			<div className="relative flex h-32 space-x-2">
 				<UserAvatarComponent username={author} href={`/profile/${author}`} />
-				<div>
+				<div className="flex-1">
 					<VideoTitleComponent title={title} />
 					<VideoTextComponent text={author} />
 					<div>
 						<div>{formatViews(views)} Views</div>
-						<div>3 months ago</div>
+						<div>{formatDistance(uploadTime, new Date(), { addSuffix: true })}</div>
 					</div>
 				</div>
 				<MoreButtonComponent className="absolute right-0 top-0" />
