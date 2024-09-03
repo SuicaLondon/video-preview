@@ -2,29 +2,46 @@
 import { VideoResult } from '@/models/video-list'
 import { memo, useEffect, useRef, useState } from 'react'
 
+import { VideoCallback } from './index.type'
 import { VideoMuteButtonComponent } from './video-mute-button'
 import { VideoProgressComponent } from './video-progress'
-interface PreviewComponentProps
+interface PreviewComponentBasicProps
 	extends Pick<VideoResult, 'videoUrl' | 'title' | 'duration'> {
 	isPlaying: boolean
 }
+
+type PreviewComponentProps = PreviewComponentBasicProps & VideoCallback
 
 export const PreviewComponent = memo(function PreviewComponent({
 	videoUrl,
 	title,
 	isPlaying,
+	onVideoStart,
+	onVideoEnd,
+	onVideoResume,
+	onVideoSeek,
 }: PreviewComponentProps) {
 	const videoRef = useRef<HTMLVideoElement>(null)
 	const [currentTime, setCurrentTime] = useState(0)
 
 	useEffect(() => {
 		if (isPlaying) {
-			videoRef?.current?.play().catch((error) => {
+			if (!videoRef.current) return
+			try {
+				videoRef?.current?.play()
 				if (videoRef.current) {
-					videoRef.current.muted = false
-					videoRef.current.play()
+					if (videoRef.current.currentTime === 0) {
+						onVideoStart?.(videoRef.current)
+					} else {
+						onVideoResume?.(videoRef.current, videoRef.current.currentTime)
+					}
 				}
-			})
+			} catch (error) {
+				// TODO: Log it to Sentry
+				console.error(error)
+				videoRef.current.muted = false
+				videoRef.current.play()
+			}
 		} else {
 			videoRef?.current?.pause()
 		}
@@ -33,6 +50,16 @@ export const PreviewComponent = memo(function PreviewComponent({
 	const handleTimeUpdate = () => {
 		if (videoRef.current) {
 			setCurrentTime(videoRef.current.currentTime)
+			if (videoRef.current.currentTime >= videoRef.current.duration) {
+				onVideoEnd?.(videoRef.current)
+			}
+		}
+	}
+
+	const onVideoProgressChanged = (time: number) => {
+		setCurrentTime(time)
+		if (videoRef.current) {
+			onVideoSeek?.(videoRef.current, time)
 		}
 	}
 
@@ -54,7 +81,7 @@ export const PreviewComponent = memo(function PreviewComponent({
 			<VideoProgressComponent
 				videoRef={videoRef}
 				className="absolute bottom-0"
-				seCurrentTime={setCurrentTime}
+				onVideoProgressChanged={onVideoProgressChanged}
 				currentTime={currentTime}
 			/>
 		</div>

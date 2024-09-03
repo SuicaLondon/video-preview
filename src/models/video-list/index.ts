@@ -13,10 +13,3 @@ export interface VideoResult {
 }
 
 export type VideoListResponse = VideoResult[]
-
-// The reason why it is not using TS enum is to reduce the bundle size
-export const VideoMode = {
-	interactive: 'interactive',
-	static: 'static',
-}
-export type VideoModeEnum = (typeof VideoMode)[keyof typeof VideoMode]

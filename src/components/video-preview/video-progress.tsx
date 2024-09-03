@@ -13,12 +13,12 @@ interface VideoProgressComponentProps {
 	videoRef: RefObject<HTMLVideoElement>
 	className: string
 	currentTime: number
-	seCurrentTime: (time: number) => void
+	onVideoProgressChanged: (time: number) => void
 }
 export const VideoProgressComponent = memo(function VideoProgressComponent({
 	videoRef,
 	className,
-	seCurrentTime,
+	onVideoProgressChanged,
 }: VideoProgressComponentProps) {
 	const progressRef = useRef<HTMLProgressElement>(null)
 
@@ -30,7 +30,7 @@ export const VideoProgressComponent = memo(function VideoProgressComponent({
 				const clickPercentage = clickPosition / rect.width
 				const newTime = clickPercentage * videoRef?.current?.duration
 				videoRef.current.currentTime = newTime
-				seCurrentTime(newTime)
+				onVideoProgressChanged(newTime)
 			}
 		},
 		[videoRef, progressRef],

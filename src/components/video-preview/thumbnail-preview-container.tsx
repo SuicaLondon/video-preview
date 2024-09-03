@@ -1,14 +1,15 @@
 'use client'
-import { title } from 'process'
-import { ThumbnailComponent } from './thumbnail'
+import { VideoResult } from '@/models/video-list'
 import { useRef, useState } from 'react'
+import { VideoMode, VideoModeEnum, VideoModeProps } from './index.type'
 import { PreviewComponent } from './preview'
-import { VideoMode, VideoModeEnum, VideoResult } from '@/models/video-list'
+import { ThumbnailComponent } from './thumbnail'
 
-interface ThumbnailPreviewContainerProps
-	extends Pick<VideoResult, 'thumbnailUrl' | 'videoUrl' | 'title' | 'duration'> {
-	mode: VideoModeEnum
-}
+type ThumbnailPreviewContainerProps = Pick<
+	VideoResult,
+	'thumbnailUrl' | 'videoUrl' | 'title' | 'duration'
+> &
+	VideoModeProps
 
 export function ThumbnailPreviewContainerComponent({
 	thumbnailUrl,
@@ -16,12 +17,12 @@ export function ThumbnailPreviewContainerComponent({
 	title,
 	duration,
 	mode,
+	...props
 }: ThumbnailPreviewContainerProps) {
 	const timerRef = useRef<NodeJS.Timeout | null>(null)
 	const [isPlaying, setIsPlaying] = useState(false)
 
 	const handleMouseEnter = () => {
-		console.log('over')
 		if (mode === VideoMode.interactive) {
 			timerRef.current = setTimeout(() => {
 				setIsPlaying(true)
@@ -31,7 +32,6 @@ export function ThumbnailPreviewContainerComponent({
 	}
 
 	const handleMouseLeave = () => {
-		console.log('out')
 		if (mode === VideoMode.interactive) {
 			if (timerRef.current) {
 				clearTimeout(timerRef.current)
@@ -51,6 +51,7 @@ export function ThumbnailPreviewContainerComponent({
 				videoUrl={videoUrl}
 				title={title}
 				duration={duration}
+				{...props}
 			/>
 			{!isPlaying && (
 				<div className="absolute left-0 top-0 h-full w-full">
