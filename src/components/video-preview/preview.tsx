@@ -94,7 +94,7 @@ export const PreviewComponent = memo(function PreviewComponent({
 			/>
 			{isPlaying && (
 				<VideoTimeText
-					className="absolute bottom-2 right-2 z-10"
+					className="absolute bottom-4 right-2 z-10"
 					timeString={`${formatSecondsToHHmmss(currentTime)} / ${formatSecondsToHHmmss(videoRef.current?.duration ?? 0)}`}
 				/>
 			)}
