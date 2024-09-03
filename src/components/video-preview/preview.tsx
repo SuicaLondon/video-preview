@@ -71,7 +71,7 @@ export const PreviewComponent = memo(function PreviewComponent({
 			onVideoSeek?.(videoRef.current, time)
 		}
 	}
-
+	console.log(currentTime, videoRef.current?.duration ?? 0)
 	return (
 		<div className="relative h-full w-full">
 			<video
@@ -97,7 +97,7 @@ export const PreviewComponent = memo(function PreviewComponent({
 			{isPlaying && (
 				<VideoTimeText
 					className="absolute bottom-4 right-2 z-10"
-					timeString={`${formatSecondsToHHmmss(currentTime)} / ${formatSecondsToHHmmss(videoRef.current?.duration ?? 0)}`}
+					timeString={`${formatSecondsToHHmmss(currentTime)} / ${formatSecondsToHHmmss(Number.isNaN(videoRef.current?.duration) ? 0 : (videoRef.current?.duration ?? 0))}`}
 				/>
 			)}
 		</div>
