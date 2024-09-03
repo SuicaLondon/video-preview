@@ -42,7 +42,7 @@ export function VideoPreviewComponent({
 	return (
 		<div
 			className={clsx(
-				'flex w-full flex-col space-y-4 rounded-xl p-3 2xl:max-w-96',
+				'flex w-full flex-col space-y-4 rounded-xl p-3 5xl:max-w-96',
 				{
 					'hover:bg-hover-odd dark:hover:bg-hover-odd-dark': isOdd,
 					'hover:bg-hover-even dark:hover:bg-hover-even-dark': !isOdd,
