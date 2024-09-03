@@ -3,7 +3,7 @@ import { SidebarLinkItem } from '@/models/sidebar-links/sidebar-link.model'
 export const SIDEBAR_LINK_LIST: SidebarLinkItem[] = [
 	{
 		id: '0',
-		href: '/videos',
+		href: '/',
 		name: 'CSR Videos',
 		icon: '🐧',
 	},

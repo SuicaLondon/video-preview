@@ -1,9 +1,7 @@
-import { GameList } from '@/modules/video-list'
+import MainContainerComponent from '@/components/main-container'
+import VideoList from '@/modules/video-list'
+import { redirect } from 'next/navigation'
 
 export default function Home() {
-	return (
-		<main className="flex min-h-screen w-full flex-col items-center justify-between bg-white dark:bg-gray-950">
-			<GameList />
-		</main>
-	)
+	redirect('videos')
 }

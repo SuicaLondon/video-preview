@@ -16,7 +16,7 @@ export function SidebarLink({ href, name, icon, isOpened }: SidebarLinkProps) {
 				className={clsx('hover:bg-gray-700 dark:hover:bg-gray-300', {
 					underline: pathname != href,
 				})}
-				href="/videos"
+				href={href}
 			>
 				{isOpened ? `${icon} ${name}` : icon}
 			</Link>
