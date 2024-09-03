@@ -1,5 +1,6 @@
 import React, { memo } from 'react'
 import { VideoPreviewComponent } from '../video-preview'
+import { VideoListResponse } from '@/models/video-list'
 interface VideoListComponentProps {
 	videoList?: VideoListResponse
 }
@@ -13,6 +14,7 @@ export const VideoListComponent = memo(function VideoListComponent({
 				return (
 					<VideoPreviewComponent
 						key={index}
+						// {...video} // This is an optional
 						id={video.id}
 						thumbnailUrl={video.thumbnailUrl}
 						duration={video.duration}
