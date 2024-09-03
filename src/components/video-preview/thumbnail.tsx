@@ -17,8 +17,6 @@ export const ThumbnailComponent = memo(function ThumbnailComponent({
 	return (
 		<img
 			src={thumbnailUrl}
-			width={999}
-			height={999}
 			alt={`The thumbnail of the Video ${title}`}
 			className="h-full w-full object-cover"
 		/>

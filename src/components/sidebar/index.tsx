@@ -1,15 +1,19 @@
 'use client'
 import { SidebarLinkItem } from '@/models/sidebar-links/sidebar-link.model'
 import { SidebarLink } from './sidebar-link'
-import { useState } from 'react'
-import ViewSidebarIcon from '@mui/icons-material/ViewSidebar'
+import { memo, useState } from 'react'
+
 import clsx from 'clsx'
-import CloseIcon from '@mui/icons-material/Close'
+import { CloseSidebarButton } from './close-sidebar-button'
+
 interface SidebarComponentProps {
 	linkList: SidebarLinkItem[]
 }
 
-export function SidebarComponent({ linkList }: SidebarComponentProps) {
+export const SidebarComponent = memo(function SidebarComponent({
+	linkList,
+}: SidebarComponentProps) {
+	// TODO: This should be moved to state management likes Redux or Jotai
 	const [isOpened, setIsOpened] = useState(false)
 	return (
 		<aside
@@ -18,9 +22,7 @@ export function SidebarComponent({ linkList }: SidebarComponentProps) {
 				'w-10': !isOpened,
 			})}
 		>
-			<button onClick={() => setIsOpened(!isOpened)}>
-				{isOpened ? <CloseIcon /> : <ViewSidebarIcon />}
-			</button>
+			<CloseSidebarButton isOpened={isOpened} setIsOpened={setIsOpened} />
 			<ul>
 				{linkList.map((link) => {
 					return (
@@ -37,4 +39,4 @@ export function SidebarComponent({ linkList }: SidebarComponentProps) {
 			</ul>
 		</aside>
 	)
-}
+})
