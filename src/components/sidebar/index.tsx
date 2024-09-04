@@ -1,18 +1,18 @@
 'use client'
-import { SidebarLinkItem } from '@/models/sidebar-links/sidebar-link.model'
+import { ISidebarLinkItem } from '@/models/sidebar-links/sidebar-link.model'
 import { SidebarLink } from './sidebar-link'
 import { memo, useState } from 'react'
 
 import clsx from 'clsx'
 import { CloseSidebarButton } from './close-sidebar-button'
 
-interface SidebarComponentProps {
-	linkList: SidebarLinkItem[]
+interface ISidebarComponentProps {
+	linkList: ISidebarLinkItem[]
 }
 
 export const SidebarComponent = memo(function SidebarComponent({
 	linkList,
-}: SidebarComponentProps) {
+}: ISidebarComponentProps) {
 	// TODO: This should be moved to state management likes Redux or Jotai
 	const [isOpened, setIsOpened] = useState(false)
 	return (

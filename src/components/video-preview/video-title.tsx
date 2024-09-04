@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React, { memo } from 'react'
 
-interface VideoTitleProps {
+interface IVideoTitleProps {
 	title: string
 	href: string
 }
@@ -9,7 +9,7 @@ interface VideoTitleProps {
 export const VideoTitleComponent = memo(function VideoTitleComponent({
 	title,
 	href,
-}: VideoTitleProps) {
+}: IVideoTitleProps) {
 	return (
 		<Link
 			aria-label={`The title of the video: ${title}`}

@@ -3,7 +3,7 @@ import VolumeUpIcon from '@mui/icons-material/VolumeUp'
 import VolumeOffIcon from '@mui/icons-material/VolumeOff'
 import { twMerge } from 'tailwind-merge'
 
-interface VideoMuteButtonComponentProps {
+interface IVideoMuteButtonComponentProps {
 	videoRef: RefObject<HTMLVideoElement>
 	className: string
 }
@@ -11,7 +11,7 @@ interface VideoMuteButtonComponentProps {
 export const VideoMuteButtonComponent = memo(function VideoMuteButtonComponent({
 	videoRef,
 	className,
-}: VideoMuteButtonComponentProps) {
+}: IVideoMuteButtonComponentProps) {
 	const [isMuted, setIsMuted] = useState(true)
 	const handleMute = () => {
 		if (videoRef.current) {

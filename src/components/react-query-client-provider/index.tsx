@@ -3,13 +3,13 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactNode, useRef } from 'react'
 
-interface ReactQueryClientProviderProps {
+interface IReactQueryClientProviderProps {
 	children: ReactNode
 }
 
 export const ReactQueryClientProvider = ({
 	children,
-}: ReactQueryClientProviderProps) => {
+}: IReactQueryClientProviderProps) => {
 	const queryClientRef = useRef(
 		new QueryClient({
 			defaultOptions: {

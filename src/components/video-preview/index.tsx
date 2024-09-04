@@ -6,12 +6,12 @@ import { VideoTitleComponent } from './video-title'
 import { formatViews } from '@/utils/format/format-utils'
 import { ThumbnailPreviewContainerComponent } from './thumbnail-preview-container'
 import { VideoMode, VideoModeProps } from './index.type'
-import { VideoResult } from '@/models/video-list'
+import { IVideoResult } from '@/models/video-list'
 import { formatDistance } from 'date-fns'
 
-interface VideoPreviewComponentBasicProps
+interface IVideoPreviewComponentBasicProps
 	extends Pick<
-		VideoResult,
+		IVideoResult,
 		| 'id'
 		| 'title'
 		| 'thumbnailUrl'
@@ -24,7 +24,7 @@ interface VideoPreviewComponentBasicProps
 	isOdd?: boolean
 }
 
-type VideoPreviewComponentProps = VideoPreviewComponentBasicProps &
+type VideoPreviewComponentProps = IVideoPreviewComponentBasicProps &
 	VideoModeProps
 
 export function VideoPreviewComponent({

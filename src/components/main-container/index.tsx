@@ -1,11 +1,11 @@
 import React, { ReactNode } from 'react'
 
-interface MainContainerComponentProps {
+interface IMainContainerComponentProps {
 	children: ReactNode
 }
 export default function MainContainerComponent({
 	children,
-}: MainContainerComponentProps) {
+}: IMainContainerComponentProps) {
 	return (
 		<main className="flex min-h-screen w-full flex-col items-center justify-between bg-white dark:bg-gray-950">
 			{children}

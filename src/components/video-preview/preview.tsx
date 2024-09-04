@@ -1,19 +1,19 @@
 'use client'
-import { VideoResult } from '@/models/video-list'
+import { IVideoResult } from '@/models/video-list'
 import { memo, useEffect, useRef, useState } from 'react'
 
-import { VideoCallback } from './index.type'
+import { IVideoCallback } from './index.type'
 import { VideoMuteButtonComponent } from './video-mute-button'
 import { VideoTrackBarComponent } from './video-track-bar'
 import { useThrottleState } from '@/hooks/use-throttle-state'
 import VideoTimeText from './video-time-text'
 import { formatSecondsToHHmmss } from '@/utils/format/format-utils'
-interface PreviewComponentBasicProps
-	extends Pick<VideoResult, 'videoUrl' | 'title' | 'duration'> {
+interface IPreviewComponentBasicProps
+	extends Pick<IVideoResult, 'videoUrl' | 'title' | 'duration'> {
 	isPlaying: boolean
 }
 
-type PreviewComponentProps = PreviewComponentBasicProps & VideoCallback
+type PreviewComponentProps = IPreviewComponentBasicProps & IVideoCallback
 
 export const PreviewComponent = memo(function PreviewComponent({
 	videoUrl,

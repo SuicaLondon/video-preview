@@ -1,4 +1,4 @@
-export interface SidebarLinkItem {
+export interface ISidebarLinkItem {
 	id: string
 	icon: string
 	href: string

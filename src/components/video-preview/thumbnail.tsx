@@ -1,15 +1,15 @@
-import { VideoResult } from '@/models/video-list'
+import { IVideoResult } from '@/models/video-list'
 import { error } from 'console'
 import Image from 'next/image'
 import React, { memo } from 'react'
 
-interface ThumbnailComponentProps
-	extends Pick<VideoResult, 'thumbnailUrl' | 'title'> {}
+interface IThumbnailComponentProps
+	extends Pick<IVideoResult, 'thumbnailUrl' | 'title'> {}
 
 export const ThumbnailComponent = memo(function ThumbnailComponent({
 	thumbnailUrl,
 	title,
-}: ThumbnailComponentProps) {
+}: IThumbnailComponentProps) {
 	/// The reason why it is using Image component from Next.js is because it is not
 	/// efficient to generate the image in different resolution for different devices.
 	/// The image should be process when it was uploaded from the CMS, and processed
