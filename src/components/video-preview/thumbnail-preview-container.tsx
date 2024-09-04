@@ -1,13 +1,13 @@
 'use client'
-import { VideoResult } from '@/models/video-list'
+import { IVideoResult } from '@/models/video-list'
 import { useRef, useState } from 'react'
-import { VideoMode, VideoModeEnum, VideoModeProps } from './index.type'
+import { VideoMode, VideoModeProps } from './index.type'
 import { PreviewComponent } from './preview'
 import { ThumbnailComponent } from './thumbnail'
 import VideoTimeText from './video-time-text'
 
 type ThumbnailPreviewContainerProps = Pick<
-	VideoResult,
+	IVideoResult,
 	'thumbnailUrl' | 'videoUrl' | 'title' | 'duration'
 > &
 	VideoModeProps
