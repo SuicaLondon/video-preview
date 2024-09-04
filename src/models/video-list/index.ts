@@ -1,4 +1,4 @@
-export interface VideoResult {
+export interface IVideoResult {
 	id: string
 	title: string
 	thumbnailUrl: string
@@ -12,4 +12,4 @@ export interface VideoResult {
 	isLive: string
 }
 
-export type VideoListResponse = VideoResult[]
+export type VideoListResponse = IVideoResult[]

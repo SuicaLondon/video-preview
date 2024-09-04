@@ -2,13 +2,13 @@ import { VideoListResponse } from '@/models/video-list'
 import { memo } from 'react'
 import { VideoPreviewComponent } from '../video-preview'
 import { VideoMode } from '../video-preview/index.type'
-interface VideoListComponentProps {
+interface IVideoListComponentProps {
 	videoList?: VideoListResponse
 }
 
 export const VideoListComponent = memo(function VideoListComponent({
 	videoList,
-}: VideoListComponentProps) {
+}: IVideoListComponentProps) {
 	/// This is not the best solution, it have a couple of solution which is better
 	/// 1. What Youtube is using is calculating the screen width and decide the max width of each component of video card
 	/// 2. Another solution is make larger breakpoints likes 5xl: 3840px to flex and set a bigger max-width for video card

@@ -5,7 +5,7 @@ export const VideoMode = {
 } as const
 export type VideoModeEnum = (typeof VideoMode)[keyof typeof VideoMode]
 
-export interface VideoCallback {
+export interface IVideoCallback {
 	onVideoStart?: (videoTarget: HTMLVideoElement) => void
 	onVideoEnd?: (videoTarget: HTMLVideoElement) => void
 	onVideoResume?: (videoTarget: HTMLVideoElement, time: number) => void
@@ -13,5 +13,5 @@ export interface VideoCallback {
 }
 
 export type VideoModeProps =
-	| ({ mode: (typeof VideoMode)['interactive'] } & VideoCallback)
+	| ({ mode: (typeof VideoMode)['interactive'] } & IVideoCallback)
 	| { mode: (typeof VideoMode)['static'] }

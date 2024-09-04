@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React, { memo } from 'react'
 
-interface UserIconProps {
+interface IUserIconProps {
 	username: string
 	href: string
 }
@@ -9,7 +9,7 @@ interface UserIconProps {
 export const UserAvatarComponent = memo(function UserAvatarComponent({
 	username,
 	href,
-}: UserIconProps) {
+}: IUserIconProps) {
 	return (
 		<Link
 			className="focus-solid-outline flex h-8 w-8 items-center justify-center rounded-full border-transparent bg-yellow-300 dark:bg-yellow-700"

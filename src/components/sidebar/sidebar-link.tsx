@@ -1,14 +1,14 @@
 'use client'
-import { SidebarLinkItem } from '@/models/sidebar-links/sidebar-link.model'
+import { ISidebarLinkItem } from '@/models/sidebar-links/sidebar-link.model'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
 
-interface SidebarLinkProps extends SidebarLinkItem {
+interface ISidebarLinkProps extends ISidebarLinkItem {
 	isOpened: boolean
 }
-export function SidebarLink({ href, name, icon, isOpened }: SidebarLinkProps) {
+export function SidebarLink({ href, name, icon, isOpened }: ISidebarLinkProps) {
 	const pathname = usePathname()
 	return (
 		<li>

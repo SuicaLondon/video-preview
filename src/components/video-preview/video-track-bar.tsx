@@ -9,7 +9,7 @@ import React, {
 } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-interface VideoTrackBarComponentProps {
+interface IVideoTrackBarComponentProps {
 	videoRef: RefObject<HTMLVideoElement>
 	className: string
 	currentTime: number
@@ -20,7 +20,7 @@ export const VideoTrackBarComponent = memo(function VideoTrackBarComponent({
 	className,
 	currentTime,
 	onVideoProgressChanged,
-}: VideoTrackBarComponentProps) {
+}: IVideoTrackBarComponentProps) {
 	const handleTrackBarChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
 		if (videoRef.current) {
 			const newTime = parseFloat(event.target.value)

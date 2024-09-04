@@ -3,7 +3,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert'
 import { memo } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-interface MoreButtonProps {
+interface IMoreButtonProps {
 	onClick?: () => void
 	className?: string
 }
@@ -11,7 +11,7 @@ interface MoreButtonProps {
 export const MoreButtonComponent = memo(function MoreButtonComponent({
 	onClick,
 	className,
-}: MoreButtonProps) {
+}: IMoreButtonProps) {
 	return (
 		<button
 			className={twMerge('focus-solid-outline', className)}
