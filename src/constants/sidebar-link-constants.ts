@@ -1,6 +1,6 @@
-import { SidebarLinkItem } from '@/models/sidebar-links/sidebar-link.model'
+import { ISidebarLinkItem } from '@/models/sidebar-links/sidebar-link.model'
 
-export const SIDEBAR_LINK_LIST: SidebarLinkItem[] = [
+export const SIDEBAR_LINK_LIST: ISidebarLinkItem[] = [
 	{
 		id: '0',
 		href: '/',
